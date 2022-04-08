@@ -1,0 +1,20 @@
+# Base build
+docker build --tag=firewall --build-arg MY_URL=https://cbo-rdc-dev.netops.charter.com --no-cache .
+
+# Web build
+docker build --tag=firewall-web --no-cache .
+
+# Web container creation
+docker container create --env-file=../.env-dev --link sre-redis --name firewall-django -p 8121:8000 firewall-web
+
+# Task build
+docker build --tag=firewall-tasks --no-cache .
+
+# Task container creation
+docker container create --env-file=../.env-dev --link sre-redis --name firewall-celery firewall-tasks
+
+# Schedule build
+docker build --tag=firewall-scheduler --no-cache .
+
+# Schedule container creation
+docker container create --env-file=../.env-dev --link sre-redis --name firewall-beat firewall-scheduler

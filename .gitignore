@@ -1,0 +1,16 @@
+*.pyc
+*.log
+*.tgz 
+
+created/
+
+id_rsa
+.env
+.env-dev
+set_environ
+set_services
+
+.idea
+.vscode
+webpack-stats.json
+frontend/webpack-stats.json

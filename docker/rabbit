@@ -1,0 +1,14 @@
+# run command
+docker run -d \
+  --restart always \
+  --hostname rabbitmq \
+  --name rabbitmq \
+  -e RABBITMQ_DEFAULT_USER=cbooetools \
+  -e RABBITMQ_DEFAULT_PASS=cbooetools-rabbit \
+  -v rabbitmq:/var/lib/rabbitmq/mnesia/ \
+  -p 127.0.0.1:5672:5672 \
+  -p 127.0.0.1:15672:15672 \
+  rabbitmq:3-management
+
+# example vhost creation
+curl -u cbooetools:cbooetools-rabbit -X PUT http://localhost:15672/api/vhosts/intake

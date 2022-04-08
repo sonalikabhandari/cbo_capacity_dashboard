@@ -1,0 +1,40 @@
+Hello {{ name | safe }},
+
+{% spaceless %}
+{% if type == 'new' %}
+A new Port Request has been received and submitted.
+{% elif type == 'resolved' %}
+Your requested Port Rules have been implemented.  Please take a few moments
+to test the new Rules to ensure desired connectivity has been achieved. After
+72 business hours we will consider this change successful if no response has
+been received.  Please direct all responses to the JIRA link provided below.
+{% elif type == 'closed' %}
+Your Port Request has been closed.  Should you require further assistance
+please open a new request at {{ cbo_url | safe }}
+{% elif type == 'cancelled' %}
+Your Port Request has been cancelled as requested.  If you initiated this
+request in error please open a new request at {{ cbo_url | safe }}
+{% elif type == 'denied' %}
+Your Port Request has been denied.  The engineer who denied the request
+should be reaching you via email shortly.  Please direct any inquiries to the
+JIRA link provided below.
+{% elif type == 'edit' %}
+Your Port Request has been modified as requested.  Your JIRA Issue ID has not
+been changed.
+{% endif %}
+{% endspaceless %}
+
+Please find your details below:
+
+Validation ID: {{ validation | safe }}
+JIRA ID: {{ jira | safe }}
+
+You can check the status of your request here: {{ cbo_url | safe }}
+You can add comments or check the progress here: {{ jira_url | safe }}
+
+Please direct any questions regarding to the JIRA link provided above.
+
+Please do not respond directly to this email as the mailbox is not monitored.
+
+Thank you,
+CBO - Core and Backbone Operations
